@@ -8,3 +8,5 @@ node app.js
 
 ### Navigate to index page
 localhost:8080
+
+Now check the console in Developer Tools.
