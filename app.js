@@ -34,8 +34,7 @@ function proximityChecker(socket) {
 io.on('connection', function (socket) {
     setInterval(temperatureChecker, tPeriod, socket);
 
-    var checkProximity = randomInt(1, 3) * 1000;
-    setTimeout(proximityChecker, checkProximity, socket);
+    proximityChecker(socket);
 });
 
 server.listen(8080);
