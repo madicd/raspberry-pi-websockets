@@ -10,7 +10,6 @@ function randomInteger(low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
 }
 
-// Sends fake temperatures each tPeriod milis
 var PERIOD_SEND_TEMPERATURE = 5000;
 
 function temperatureChecker(socket) {
