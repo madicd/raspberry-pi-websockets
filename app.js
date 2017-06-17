@@ -11,14 +11,20 @@ function randomInteger(low, high) {
 }
 
 var PERIOD_SEND_TEMPERATURE = 5000;
+var CHANNEL_TEMPERATURE = 'temperature';
 
-function temperatureChecker(socket) {
-    var temperature = randomInteger(24, 27);
-    socket.emit('temperature', temperature);
+function getTemperature() {
+    return randomInteger(20, 27);
 }
 
-// Sends sensor status only when it is changed
-// Sensor data is changed in random intervals in order to simulate moving object
+function emitTemperature(socket) {
+    var temperature = getTemperature();
+    socket.emit(CHANNEL_TEMPERATURE, temperature);
+}
+
+function initiatePeriodicalTemperatureEmits(socket) {
+    setInterval(emitTemperature, PERIOD_SEND_TEMPERATURE, socket);
+}
 
 var sensorState = true;
 
@@ -31,7 +37,7 @@ function proximityChecker(socket) {
 }
 
 io.on('connection', function (socket) {
-    setInterval(temperatureChecker, PERIOD_SEND_TEMPERATURE, socket);
+    initiatePeriodicalTemperatureEmits(socket);
 
     proximityChecker(socket);
 });
