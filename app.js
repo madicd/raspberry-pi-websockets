@@ -2,9 +2,6 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
 
 function randomInteger(low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
@@ -42,6 +39,10 @@ function emitProximityAndScheduleNextEmit(socket) {
 
     scheduleNextProximityEmit(socket);
 }
+
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
 
 io.on('connection', function (socket) {
     initiatePeriodicalTemperatureEmits(socket);
