@@ -14,9 +14,9 @@ function randomBoolean() {
     return Math.random() < 0.5;
 }
 
-var PERIOD_SEND_TEMPERATURE = 5000;
-var CHANNEL_TEMPERATURE = 'temperature';
-var CHANNEL_PROXIMITY = 'proximity';
+const PERIOD_SEND_TEMPERATURE = 5000;
+const CHANNEL_TEMPERATURE = 'temperature';
+const CHANNEL_PROXIMITY = 'proximity';
 
 function getTemperature() {
     return randomInteger(20, 27);
