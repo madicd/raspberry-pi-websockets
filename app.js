@@ -10,6 +10,10 @@ function randomInteger(low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
 }
 
+function randomBoolean() {
+    return Math.random() < 0.5;
+}
+
 var PERIOD_SEND_TEMPERATURE = 5000;
 var CHANNEL_TEMPERATURE = 'temperature';
 
@@ -28,18 +32,22 @@ function initiatePeriodicalTemperatureEmits(socket) {
 
 var sensorState = true;
 
-function proximityChecker(socket) {
+function scheduleNextProximityEmit(socket) {
+    var nextChange = randomInteger(1, 15) * 1000;
+    setTimeout(emitProximityAndScheduleNextEmit, nextChange, socket);
+}
+
+function emitProximityAndScheduleNextEmit(socket) {
     sensorState = !sensorState;
     socket.emit('proximity', sensorState);
 
-    var nextChange = randomInteger(1, 15) * 1000;
-    setTimeout(proximityChecker, nextChange, socket);
+    scheduleNextProximityEmit(socket);
 }
 
 io.on('connection', function (socket) {
     initiatePeriodicalTemperatureEmits(socket);
 
-    proximityChecker(socket);
+    emitProximityAndScheduleNextEmit(socket);
 });
 
 server.listen(8080);
