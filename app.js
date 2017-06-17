@@ -33,8 +33,8 @@ function initiatePeriodicalTemperatureEmits(socket) {
 var sensorState = true;
 
 function scheduleNextProximityEmit(socket) {
-    var nextChange = randomInteger(1, 15) * 1000;
-    setTimeout(emitProximityAndScheduleNextEmit, nextChange, socket);
+    var nextChangeSeconds = randomInteger(1, 15) * 1000;
+    setTimeout(emitProximityAndScheduleNextEmit, nextChangeSeconds, socket);
 }
 
 function emitProximityAndScheduleNextEmit(socket) {
