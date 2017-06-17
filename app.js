@@ -6,15 +6,15 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-function randomInt(low, high) {
+function randomInteger(low, high) {
     return Math.floor(Math.random() * (high - low + 1) + low);
 }
 
 // Sends fake temperatures each tPeriod milis
-var tPeriod = 5000;
+var PERIOD_SEND_TEMPERATURE = 5000;
 
 function temperatureChecker(socket) {
-    var temperature = randomInt(24, 27);
+    var temperature = randomInteger(24, 27);
     socket.emit('temperature', temperature);
 }
 
@@ -27,12 +27,12 @@ function proximityChecker(socket) {
     sensorState = !sensorState;
     socket.emit('proximity', sensorState);
 
-    var nextChange = randomInt(1, 15) * 1000;
+    var nextChange = randomInteger(1, 15) * 1000;
     setTimeout(proximityChecker, nextChange, socket);
 }
 
 io.on('connection', function (socket) {
-    setInterval(temperatureChecker, tPeriod, socket);
+    setInterval(temperatureChecker, PERIOD_SEND_TEMPERATURE, socket);
 
     proximityChecker(socket);
 });
