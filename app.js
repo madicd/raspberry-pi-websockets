@@ -16,6 +16,7 @@ function randomBoolean() {
 
 var PERIOD_SEND_TEMPERATURE = 5000;
 var CHANNEL_TEMPERATURE = 'temperature';
+var CHANNEL_PROXIMITY = 'proximity';
 
 function getTemperature() {
     return randomInteger(20, 27);
@@ -37,7 +38,7 @@ function scheduleNextProximityEmit(socket) {
 
 function emitProximityAndScheduleNextEmit(socket) {
     var sensorState = randomBoolean();
-    socket.emit('proximity', sensorState);
+    socket.emit(CHANNEL_PROXIMITY, sensorState);
 
     scheduleNextProximityEmit(socket);
 }
