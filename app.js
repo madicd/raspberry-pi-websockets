@@ -4,7 +4,10 @@ var io = require('socket.io')(server);
 
 
 function randomInteger(low, high) {
-    return Math.floor(Math.random() * (high - low + 1) + low);
+    var diff = high - low + 1;
+    var randomBetweenZeroAndDiff = Math.random() * diff;
+    var randomBetweenLowAndHigh = randomBetweenZeroAndDiff + low;
+    return Math.round(randomBetweenLowAndHigh);
 }
 
 function randomBoolean() {
