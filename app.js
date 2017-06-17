@@ -30,15 +30,13 @@ function initiatePeriodicalTemperatureEmits(socket) {
     setInterval(emitTemperature, PERIOD_SEND_TEMPERATURE, socket);
 }
 
-var sensorState = true;
-
 function scheduleNextProximityEmit(socket) {
     var nextChangeSeconds = randomInteger(1, 15) * 1000;
     setTimeout(emitProximityAndScheduleNextEmit, nextChangeSeconds, socket);
 }
 
 function emitProximityAndScheduleNextEmit(socket) {
-    sensorState = !sensorState;
+    var sensorState = randomBoolean();
     socket.emit('proximity', sensorState);
 
     scheduleNextProximityEmit(socket);
