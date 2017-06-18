@@ -13,11 +13,11 @@
 
         var socket = io.connect('/');
 
-        socket.on(CHANNEL_TEMPERATURE, function (data) {
-            console.log('Temperature: ', data);
+        socket.on(CHANNEL_TEMPERATURE, function (temperature) {
+            console.log('Temperature: ', temperature);
 
             var temperatureValueSpan = document.querySelector('#temperatureValue');
-            temperatureValueSpan.textContent = data;
+            temperatureValueSpan.textContent = temperature;
         });
 
         socket.on(CHANNEL_PROXIMITY, function (data) {
