@@ -20,8 +20,8 @@
             temperatureSpan.textContent = temperature;
         });
 
-        socket.on(CHANNEL_PROXIMITY, function (data) {
-            console.log('Person in front of mirror: ', data);
+        socket.on(CHANNEL_PROXIMITY, function (proximity) {
+            console.log('Person in front of mirror: ', proximity);
         });
     </script>
 </body>
