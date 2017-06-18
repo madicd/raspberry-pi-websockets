@@ -5,14 +5,17 @@
 
 <body>
     <script src="/socket.io/socket.io.js"></script>
-    <script>  
+    <script>
+        const CHANNEL_TEMPERATURE = 'temperature';
+        const CHANNEL_PROXIMITY = 'proximity';
+
         var socket = io.connect('/');
 
-        socket.on('temperature', function(data) {
+        socket.on(CHANNEL_TEMPERATURE, function (data) {
             console.log('Temperature: ', data);
         });
-        
-        socket.on('proximity', function(data) {
+
+        socket.on(CHANNEL_PROXIMITY, function (data) {
             console.log('Person in front of mirror: ', data);
         });
     </script>
