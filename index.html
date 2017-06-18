@@ -4,7 +4,7 @@
 <head></head>
 
 <body>
-    Temperature: <span id="temperatureValue">No value.</span>
+    Temperature: <span id="temperature">No value.</span>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -16,8 +16,8 @@
         socket.on(CHANNEL_TEMPERATURE, function (temperature) {
             console.log('Temperature: ', temperature);
 
-            var temperatureValueSpan = document.querySelector('#temperatureValue');
-            temperatureValueSpan.textContent = temperature;
+            var temperatureSpan = document.querySelector('#temperature');
+            temperatureSpan.textContent = temperature;
         });
 
         socket.on(CHANNEL_PROXIMITY, function (data) {
