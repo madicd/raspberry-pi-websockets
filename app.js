@@ -3,11 +3,11 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 
-function randomInteger(low, high) {
+function randomFloat(low, high) {
     var diff = high - low + 1;
     var randomBetweenZeroAndDiff = Math.random() * diff;
     var randomBetweenLowAndHigh = randomBetweenZeroAndDiff + low;
-    return Math.round(randomBetweenLowAndHigh);
+    return randomBetweenLowAndHigh;
 }
 
 function randomBoolean() {
@@ -19,7 +19,8 @@ const CHANNEL_TEMPERATURE = 'temperature';
 const CHANNEL_PROXIMITY = 'proximity';
 
 function getTemperature() {
-    return randomInteger(20, 27);
+    var random = randomFloat(20, 27);
+    return random.toFixed(2);
 }
 
 function emitTemperature(socket) {
@@ -32,7 +33,7 @@ function initiatePeriodicalTemperatureEmits(socket) {
 }
 
 function scheduleNextProximityEmit(socket) {
-    var nextChangeSeconds = randomInteger(1, 15) * 1000;
+    var nextChangeSeconds = randomFloat(1, 15) * 1000;
     setTimeout(emitProximityAndScheduleNextEmit, nextChangeSeconds, socket);
 }
 
